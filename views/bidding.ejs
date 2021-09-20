@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="w3-container">
+      <div
+        class="w3-container w3-border w3-card w3-section w3-padding-16"
+        style="max-width: 1000px; margin-bottom: 32px !important"
+      >
+        <h2>Category : <%= request.category %></h2>
+        <h5 class="w3-lightgrey">
+          <span class="w3-tag w3-small">Posted By </span>
+          <span class="w3-text-dark-grey">: <%=request.postedby%></span>
+        </h5>
+        <h4>Title: <%= request.title %></h4>
+        <p
+          style="
+            max-width: 1000px;
+            word-wrap: break-word;
+            word-break: break-all;
+          "
+        >
+          About Request: <%= request.description%>
+        </p>
+
+        <form action="/mainfiles/<%= request._id %>">
+          <button class="w3-button w3-green"><%= request.amount%> Rs</button>
+          <button class="w3-button w3-red"><%= request.lastdate%></button>
+        </form>
+      </div>
+    </div>
+    <div class="w3-container w3-padding">
+      <button
+        class="w3-button w3-white w3-padding-large w3-large w3-black"
+        onclick="document.getElementById('subscribe').style.display='block'"
+      >
+        Bidding
+      </button>
+    </div>
+    <div id="subscribe" class="w3-modal w3-animate-opacity">
+      <div class="w3-modal-content" style="padding: 32px">
+        <div class="w3-container w3-white">
+          <i
+            onclick="document.getElementById('subscribe').style.display='none'"
+            class="fa fa-remove w3-transparent w3-button w3-xlarge w3-right"
+          ></i>
+          <h2 class="w3-wide">BIDDING</h2>
+          <p>
+            Start bidding on this request , so client can notice you for sure
+          </p>
+          <form
+            action="/mainfiles/saveBidding/<%= request._id %>"
+            method="post"
+            style="max-width: 800px"
+            class="w3-content"
+          >
+          <p>
+            <label >Request ID</label>
+            <input type="text" class="w3-input w3-border" name="requestID" value="<%= request._id%>" selected>
+
+        </p>
+        
+        <p>
+          <label >Your Developer ID (you can get your developerID from the home page navbar)</label>
+          <input type="text" class="w3-input w3-border" name="developerID" value="" selected>
+      </p>
+      <p>
+        <label>Username</label>
+        <input
+          type="text"
+          class="w3-input w3-border"
+          name="name"
+          required
+        />
+      </p>
+            <p>
+              <label>Title</label>
+              <input
+                type="text"
+                class="w3-input w3-border"
+                name="title"
+                required
+                name="title"
+              />
+            </p>
+
+            <p>
+              What makes you entitled to work on this project <br />
+              <textarea
+                required
+                name="description"
+                class="w3-input w3-border"
+                type="textarea"
+                rows="1"
+                cols="10"
+                name="description"
+              >
+              </textarea>
+            </p>
+            <p>
+              <br />
+              <select
+                class="w3-select"
+                name="category"
+                style="border: 1px solid rgba(0, 0, 0, 0.226)"
+                required
+              >
+                <option value="Web Design" selected>Web Design</option>
+                <option value="Logo Design">Logo Design</option>
+                <option value="App Development">App Development</option>
+                <option value="Graphics Design">Graphics Design</option>
+                <option value="3D Modelling">3D Modelling</option>
+                <option value="Game Development">Photography</option>
+                <option value="Game Development">MySql</option>
+                <option value="Game Development">Graphics</option>
+                <option value="Game Development">Mobile Design</option>
+                <option value="Game Development">Photoshop</option>
+                <option value="Game Development">Art</option>
+                <option value="Game Development">Drawing</option>
+                <option value="Game Development">Game Development</option>
+
+              </select>
+            </p>
+            <p>
+              Payment <br />
+              <input
+                type="text"
+                class="w3-input"
+                name="amount"
+                style="border: 1px solid rgb(0, 0, 0, 0.225)"
+                required
+              />
+            </p>
+            <p class="w3-bar">
+              <button
+                class="w3-button w3-green w3-block w3-black"
+                type="submit"
+              >
+                Post
+              </button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="w3-container">
+        <% bidding.forEach(bidding=>{ %>
+        <% if(bidding.requestID == request._id){%>    
+        <div class="w3-bar">
+          <div
+          class="w3-container w3-border  w3-section w3-blue-grey w3-padding-16 w3-bar-item "
+          style="max-width: 600px; margin-bottom: 32px !important "
+        >
+          <h2>Category : <%= bidding.category %></h2>
+          <h5 class="w3-lightgrey">
+            <span class="w3-tag w3-small">Posted By </span>
+            <span class="w3-text-dark-grey">: <%=bidding.name%></span>
+          </h5>
+          <h4>Title: <%= bidding.title %></h4>
+          <p
+            style="
+              max-width: 1000px;
+              word-wrap: break-word;
+              word-break: break-all;
+            "
+          >
+             <%= bidding.description%>
+          </p>
+  
+          <p >
+            
+            <p>Payment : <button class="w3-button  w3-border w3-border-grey w3-blue-grey w3-padding-small"> <%= bidding.amount%> Rs</button></p>
+            <p><form action="mainfiles/reviews/<%= bidding.developerID%>" method="get"> <button class="w3-button  w3-border w3-border-grey w3-blue-grey w3-padding-small w3-green"> Reviews</button></form> 
+          
+            </p>
+            
+         </div> 
+         <div 
+         class="w3-container w3-border  w3-section w3-black w3-padding w3-bar-item "
+         style="max-width: 600px; margin-bottom: 32px !important ">
+<p>         <button class="w3-button w3-white w3-hover-white w3-padding-small"  onclick="document.getElementById('modalDemo').style.display='block'">Contact Details</button></p>
+            <div class="w3-margin-top" style="display:block;color:black" id="modalDemo"> 
+
+                <% user.forEach(user=>{%>
+                  <%i=JSON.stringify(user._id)%>
+                  
+                  
+                  <%k=JSON.stringify(bidding.developerID)%>
+                  <%if(i == k){%>
+               <div class=" w3-margin-top w3-text-white ">
+                <div>
+                  <p>Username : <%= user.name%></p>
+                </div>
+                <hr class="w3-blue-grey" style="height: 1px;">
+                <div>
+                  <p>Email ID : <%= user.email%></p>
+                </div>
+                <hr class="w3-blue-grey" style="height: 1px;">
+                <div>
+                  <p>Phone Number: <%= user.phonenumber%></p>
+                </div>
+                <hr class="w3-blue-grey" style="height: 1px;">
+                <div>
+                  <p>Freelance Go : <%= user.category%></p>
+                </div>
+             
+               </div>
+                    <%}%>
+                  <%})%>
+              
+            </div>
+            
+          </p>
+        </div>
+        </div>
+        <%}%>
+        <%})%>
+      </div>
+  
+  </body>
+</html>

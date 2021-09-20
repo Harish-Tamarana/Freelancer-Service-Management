@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="w3-container w3-padding-large w3-content">
+      <h1 class="w3-center"><strong>Post Your Request</strong></h1>
+
+      <form
+        action="/freelancego/savedPost"
+        method="POST"
+        style="max-width: 800px"
+        class="w3-content"
+      >
+        <p>
+          <label>ID</label>
+          <input
+            type="text"
+            class="w3-input w3-border"
+            name="id"
+            required
+            value="<%=user._id%>"
+          />
+        </p>
+        <p>
+          <label>Title</label>
+          <input
+            type="text"
+            class="w3-input w3-border"
+            name="title"
+            required
+            name="title"
+          />
+        </p>
+
+        <p>
+          Description <br />
+          <textarea
+            required
+            name="description"
+            class="w3-input w3-border"
+            type="textarea"
+            rows="1"
+            cols="10"
+            name="description"
+          >
+          </textarea>
+        </p>
+        <p>
+          <br />
+          <select
+            class="w3-select"
+            name="category"
+            style="border: 1px solid rgba(0, 0, 0, 0.226)"
+            required
+          >
+            <option value="Web Design" selected>Web Design</option>
+            <option value="Logo Design">Logo Design</option>
+            <option value="App Development">App Development</option>
+            <option value="Graphics Design">Graphics Design</option>
+            <option value="3D Modelling">3D Modelling</option>
+            <option value="Game Development">Photography</option>
+            <option value="Game Development">MySql</option>
+            <option value="Game Development">Graphics</option>
+            <option value="Game Development">Mobile Design</option>
+            <option value="Game Development">Photoshop</option>
+            <option value="Game Development">Art</option>
+            <option value="Game Development">Drawing</option>
+            <option value="Game Development">Game Development</option>
+          </select>
+        </p>
+        <p>
+          Due Date <br />
+          <input
+            type="date"
+            class="w3-input"
+            style="border: 1px solid rgb(0, 0, 0, 0.225)"
+            name="lastdate"
+            required
+          />
+        </p>
+        <p>
+          Amount <br />
+          <input
+            type="text"
+            class="w3-input"
+            name="amount"
+            style="border: 1px solid rgb(0, 0, 0, 0.225)"
+            required
+          />
+        </p>
+        <p class="w3-bar">
+          <button class="w3-button w3-green" type="submit">Post</button>
+        </p>
+      </form>
+    </div>
+  </body>
+</html>
